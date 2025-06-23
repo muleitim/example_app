@@ -3,7 +3,7 @@
 <div class="card ">
 
     {{-- Title --}}
-    <h2 class="font-bold text-xl"> {{ $post->title }} </h2>
+    <h2 class="font-bold"> {{ $post->title }} </h2>
 
     {{-- Author and Date --}}
     <div class="text-xs font-light mb-4">

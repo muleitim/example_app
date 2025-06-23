@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="h-full" >
     
 <head>
     <meta charset="UTF-8">
@@ -55,10 +55,10 @@
         </nav>
     </header>
 
-    <main class="py-8 px-4 mx-auto max-w-s" >
+    <main class="py-8 px-1 sm:px-1 md:px-4 lg:px-6 mx-auto max-w-s" >
         {{ $slot }}
-    </main>    
+    </main>   
+    
 
 </body>
-
 </html>
