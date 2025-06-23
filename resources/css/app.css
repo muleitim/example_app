@@ -28,11 +28,17 @@
     .title {
         @apply text-3xl mb-4 font-bold;
     }
+    .titleCenter {
+        @apply text-3xl text-center mb-4 font-bold;
+    }
     .btn {
         @apply relative enabled:bg-slate-800 enabled:active:bg-slate-900 enabled:hover:bg-slate-700 p-2 rounded-md text-white block w-full disabled:bg-slate-500 disabled:cursor-wait;
     }
     .error {
         @apply text-xs text-red-500 mt-px;
+    }
+    .errorMargin {
+        @apply mb-4;
     }
     .input {
         @apply block w-full p-2 rounded-md ring-1 ring-slate-600 focus:ring-slate-900 focus:ring-2 outline-0 border-0 mt-1;
