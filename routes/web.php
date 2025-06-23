@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'posts');
 
-Route::view('/', 'posts.index')->name('home');
-
 Route::resource( 'posts', PostController::class );
+
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
 
 
 Route::middleware( 'auth' )->group( function(){
