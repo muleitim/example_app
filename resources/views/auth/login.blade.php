@@ -38,7 +38,6 @@
 
             {{-- Submit button --}}
             <button class="btn">Login</button>
-
         </form>
 
     </div>
