@@ -19,7 +19,7 @@
 
     <header class="bg-slate-800 shadow-lg" >
         <nav>
-            <a href=" {{ route('home') }} " class="nav-link" >Home</a>
+            <a href=" {{ route('home') }} " class="nav-link" >Start</a>
 
             <div flex="flex items-center gap-4 " >
                 <a href="#" class="nav-link" >Login</a>
