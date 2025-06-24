@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" class="h-full" >
+<html lang="en" >
     
 <head>
     <meta charset="UTF-8">
@@ -55,10 +55,13 @@
         </nav>
     </header>
 
-    <main class="py-8 px-1 sm:px-1 md:px-4 lg:px-6 mx-auto max-w-s" >
-        {{ $slot }}
-    </main>   
-    
+    <main class="min-h-screen py-1 sm:py-1 md:py-2 lg:py-4 px-1 sm:px-1 md:px-4 lg:px-6 mx-auto max-w-s" >
+        {{ $slot }}        
+    </main> 
+
+    <footer class="bg-black py-4" >
+        <p class="bg-black text-white text-right font-bold mr-4" >&copy;2025, Timothy Mulei Designs</p>
+    </footer>
 
 </body>
 </html>

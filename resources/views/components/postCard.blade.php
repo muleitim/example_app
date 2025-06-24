@@ -2,6 +2,15 @@
 
 <div class="card ">
 
+    {{-- Cover Photo --}}
+    <div>
+        @if ($post->image)
+            <img src="{{ asset('storage/' . $post->image ) }}" alt="Post Image">
+        @else 
+            <img src="{{ asset('storage/posts_images/500_333.png') }}" alt="Default Image" >
+        @endif        
+    </div>
+
     {{-- Title --}}
     <h2 class="font-bold"> {{ $post->title }} </h2>
 
