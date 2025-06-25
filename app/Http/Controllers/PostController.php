@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserSubscribed;
+use App\Mail\WelcomeMail;
 use App\Models\Post;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Psy\CodeCleaner\ReturnTypePass;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller implements HasMiddleware
 {
+    // Adding Auth middleware to all methods except 'index' and 'show'
     public static function middleware(): array
     {
-        return [            
-            new Middleware('auth', except: ['index', 'show'])
+        return [
+            new Middleware(['auth', 'verified'], except: ['index', 'show']),
         ];
     }
 
@@ -25,19 +29,18 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        // $posts = Post::orderBy('created_at', 'desc')->get();        
-        // $posts = Post::latest()->get();
-        $posts = Post::latest()->paginate(6);      
 
-        return view('posts.index', [ 'posts' => $posts ] );
+        $posts = Post::latest()->paginate(6);
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        // the view is being render in User Dashboard
     }
 
     /**
@@ -45,34 +48,31 @@ class PostController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        
-
-        // validate
+        // Validate
         $request->validate([
             'title' => ['required', 'max:255'],
             'body' => ['required'],
-            'image' => ['nullable', 'file', 'max:10240', 'mimes:png,jpg,jpeg,webp' ]
+            'image' => ['nullable', 'file', 'max:3000', 'mimes:webp,png,jpg']
         ]);
 
-        // Store image if exists 
-        $path = null;        
-        if( $request->hasFile('image') )
-        {
-            $path = Storage::disk('public')->put('posts_images', $request->image );
+        // Store image if exists
+        $path = null;
+        if ($request->hasFile('image')) {
+            $path = Storage::disk('public')->put('posts_images', $request->image);
         }
-     
 
-        // create a post
-        Auth::user()->posts()->create([
+        // Create a post
+        $post = Auth::user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
             'image' => $path
-        ]);        
+        ]);
 
-        // redirect to dashboard
-        return back()->with('success', 'Your post was created');
+        // Send email when users create a post (for practice)
+        // Mail::to(Auth::user())->send(new WelcomeMail(Auth::user(), $post));
 
-
+        // Redirect back to dashboard
+        return back()->with('success', 'Your post was created.');
     }
 
     /**
@@ -88,8 +88,9 @@ class PostController extends Controller implements HasMiddleware
      */
     public function edit(Post $post)
     {
-        // Check if the user is authorized to perform this action
+        // Authorizing the action
         Gate::authorize('modify', $post);
+
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -98,36 +99,34 @@ class PostController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Post $post)
     {
-        // Check if the user is authorized to perform this action
-         Gate::authorize('modify', $post);
+        // Authorizing the action
+        Gate::authorize('modify', $post);
 
-        // validate
+        // Validate
         $request->validate([
             'title' => ['required', 'max:255'],
             'body' => ['required'],
-            'image' => ['nullable', 'file', 'max:10240', 'mimes:png,jpg,jpeg,webp' ]
+            'image' => ['nullable', 'file', 'max:3000', 'mimes:webp,png,jpg']
         ]);
 
-        // Store image if exists 
-        $path = $post->image ?? null;        
-        if( $request->hasFile('image') )
-        {
-            if($post->image)
-            {
+        // Store image if exists
+        $path = $post->image ?? null;
+        if ($request->hasFile('image')) {
+            if ($post->image) {
                 Storage::disk('public')->delete($post->image);
             }
-            $path = Storage::disk('public')->put('posts_images', $request->image );
+            $path = Storage::disk('public')->put('posts_images', $request->image);
         }
 
-        // update a post
+        // Update the post
         $post->update([
             'title' => $request->title,
             'body' => $request->body,
             'image' => $path
         ]);
 
-        // redirect to dashboard
-        return redirect()->route('dashboard')->with('success', 'Your post is updated');
+        // Redirect to dashboard
+        return redirect()->route('dashboard')->with('success', 'Your post was updated.');
     }
 
     /**
@@ -135,17 +134,18 @@ class PostController extends Controller implements HasMiddleware
      */
     public function destroy(Post $post)
     {
-        // Check if the user is authorized to perform this action
-         Gate::authorize('modify', $post);
+        // Authorizing the action
+        Gate::authorize('modify', $post);
 
         // Delete post image if exists
-        if($post->image)
-        {
+        if ($post->image) {
             Storage::disk('public')->delete($post->image);
         }
 
+        // Delete the post
         $post->delete();
 
-        return back()->with('delete', 'Post deleted');
+        // Redirect back to dashboard
+        return back()->with('delete', 'Your post was deleted!');
     }
 }
