@@ -3,7 +3,7 @@
 <div class="card ">
 
     {{-- Cover Photo --}}
-    <div>
+    <div class="mb-1" >
         @if ($post->image)
             <img src="{{ asset('storage/' . $post->image ) }}" alt="Post Image">
         @else 
@@ -12,10 +12,10 @@
     </div>
 
     {{-- Title --}}
-    <h2 class="font-bold"> {{ $post->title }} </h2>
+    <p class="font-bold leading-none text-sm sm:text-sm md:text-sm lg:text-base "> {{ $post->title }} </p>
 
     {{-- Author and Date --}}
-    <div class="text-xs font-light mb-4">
+    <div class="text-xs font-light mb-2">
         <span>Posted {{ $post->created_at->diffForHumans() }} by </span>
         <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium" >{{ $post->user->username }}</a>
     </div>
