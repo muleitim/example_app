@@ -20,7 +20,7 @@
 
             {{-- Password --}}
             <div class="mb-4">
-                <label for="password">Password</label>
+                <label for="password">New Password</label>
                 <input type="password" name="password" class="input @error('password') ring-red-500 @enderror">
 
                 @error('password')

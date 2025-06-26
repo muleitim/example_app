@@ -9,7 +9,7 @@
 
         <h1 class="title">Please verify your email through the email we've sent you.</h1>
 
-        <p class="mb-4">Didn't get the email?</p>
+        <p class="mb-4">Note that the email may take about 3 minutes to be delivered to your inbox.<br><br>Didn't get the email?</p>
         <form action="{{ route('verification.send') }}" method="post">
             @csrf
 

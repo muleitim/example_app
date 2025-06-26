@@ -31,7 +31,7 @@
                 >
                     {{-- Dropdown Menu Button --}}
                     <button @click="open = !open" type="button" class="round-btn">
-                        <img src="https://picsum.photos/200" alt="Pic">
+                        <img src="https://picsum.photos/200" alt="">
                     </button>
 
                     {{-- Dropdown Menu --}}

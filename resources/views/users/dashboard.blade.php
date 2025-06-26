@@ -1,6 +1,12 @@
 <x-layout>
     
-    <h1 class="title" >Welcome {{ auth()->user()->username }}, you have {{ $posts->total() }} posts </h1>
+    <h1 class="title" >Welcome {{ auth()->user()->username }}, you have {{ $posts->total() }} 
+        @if ($posts->total() === 1)
+            post
+        @else  
+            posts
+        @endif 
+    </h1>
 
     {{-- Create post form --}}
     <div class="card mb-4" >

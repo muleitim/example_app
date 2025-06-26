@@ -5,9 +5,9 @@
     {{-- Cover Photo --}}
     <div class="mb-1" >
         @if ($post->image)
-            <img src="{{ asset('storage/' . $post->image ) }}" alt="Post Image">
+            <img src="{{ asset('storage/' . $post->image ) }}" alt="">
         @else 
-            <img src="{{ asset('storage/posts_images/500_333.png') }}" alt="Default Image" >
+            <img src="{{ asset('storage/posts_images/500_333.png') }}" alt="" >
         @endif        
     </div>
 

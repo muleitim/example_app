@@ -25,11 +25,11 @@
     .nav-link {
         @apply active:bg-slate-900 hover:bg-slate-100/10 text-slate-100 px-3 py-1 rounded-lg;
     }
-    .title {
-        @apply text-3xl mb-4 font-bold;
+    .title {       
+        @apply text-base sm:text-sm md:text-xl lg:text-2xl mb-2 font-bold;
     }
     .titleCenter {
-        @apply text-3xl text-center mb-2 font-bold;
+        @apply text-base sm:text-sm md:text-xl lg:text-2xl text-center mb-2 font-bold;
     }
     .btn {
         @apply relative enabled:bg-slate-800 enabled:active:bg-slate-900 enabled:hover:bg-slate-700 p-2 rounded-md text-white block w-full disabled:bg-slate-500 disabled:cursor-wait;

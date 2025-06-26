@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="title">Login to your account</h1>
+    <h1 class="titleCenter">Login to your account</h1>
 
     {{-- Session Messages --}}
     @if (session('status'))

@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="title">Request a password reset email</h1>
+    <h1 class="titleCenter">Request a password reset email</h1>
 
     {{-- Session Messages --}}
     @if (session('status'))
@@ -20,6 +20,8 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+
+            <p class="mb-4">Note that the email may take about 3 minutes to be delivered to your inbox.</p>
 
             {{-- Submit Button --}}
             <button x-ref="btn" class="btn">Submit</button>
