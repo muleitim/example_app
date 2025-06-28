@@ -22,9 +22,8 @@
 
     {{-- Body --}}
     @if ($full)
-        <div class="text-sm">
-            <span>{{ $post->body }}</span>
-            
+        <div class="text-sm">            
+            <span>{!! nl2br(e($post->body)) !!}</span>  
         </div>
     @else  
         <div class="text-sm">
