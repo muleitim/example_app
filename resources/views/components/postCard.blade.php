@@ -22,7 +22,7 @@
 
     {{-- Body --}}
     @if ($full)
-        <div class="text-sm  ">            
+        <div class="text-base sm:text-sm md:text-base lg:text-base ">            
             <span>{!! nl2br(e($post->body)) !!}</span>  
         </div>
     @else  
