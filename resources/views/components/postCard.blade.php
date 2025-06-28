@@ -1,6 +1,6 @@
 @props(['post', 'full' => false])
 
-<div class="card ">
+<div class="card w-full sm:w-full md:w-3/4 lg:w-1/2 mx-auto ">
 
     {{-- Cover Photo --}}
     <div class="mb-1" >
@@ -22,7 +22,7 @@
 
     {{-- Body --}}
     @if ($full)
-        <div class="text-sm">            
+        <div class="text-sm  ">            
             <span>{!! nl2br(e($post->body)) !!}</span>  
         </div>
     @else  
